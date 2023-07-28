@@ -11,6 +11,8 @@ create table STUDENT (
 	gpa float null
 )
 
-delete from STudent
+delete from STUDENT
+where id = ?
 select * from STUDENT
 insert into STUDENT values (6 , 'tu' , 20 , 'dc' , 9)
+

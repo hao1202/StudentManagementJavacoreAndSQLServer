@@ -98,4 +98,24 @@ public class StudentService implements DaoInterface<Student> {
         }
         return ketQua;
     }
+
+    @Override
+    public int removeStudent(Student student) {
+        int ketQua = -1;
+        Connection cn = DBContext.getConnection();
+        String SQL = "delete from STUDENT\n" +
+                "where id = ?";
+        try {
+            if (searchStudentWithId(student.getId()) != null) {
+                PreparedStatement pre = cn.prepareStatement(SQL);
+                pre.setInt(1, student.getId());
+                ketQua = pre.executeUpdate();
+            } else {
+                System.out.println("Không có sinh viên bạn muốn xóa");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return ketQua;
+    }
 }

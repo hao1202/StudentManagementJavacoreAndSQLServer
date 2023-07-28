@@ -7,4 +7,5 @@ public interface DaoInterface<T> {
     public void displayList();
     public int addStudent(T t);
     public T searchStudentWithId(int id);
+    public int removeStudent(T t);
 }
