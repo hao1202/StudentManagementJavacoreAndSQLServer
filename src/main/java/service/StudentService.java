@@ -11,6 +11,14 @@ import java.util.List;
 public class StudentService implements DaoInterface<Student> {
     private List<Student> list;
 
+    public void listFunction() {
+        System.out.println("1. Thêm sinh viên");
+        System.out.println("2. Hiển thị danh sách sinh viên");
+        System.out.println("3. Xóa sinh viên");
+        System.out.println("4. Sửa sinh viên");
+        System.out.println("0. Thoát");
+    }
+
     public Student createStudent() {
         Integer id = TestInput.inputInteger("id");
         String name = TestInput.inputString("name");
@@ -106,13 +114,30 @@ public class StudentService implements DaoInterface<Student> {
         String SQL = "delete from STUDENT\n" +
                 "where id = ?";
         try {
-            if (searchStudentWithId(student.getId()) != null) {
-                PreparedStatement pre = cn.prepareStatement(SQL);
-                pre.setInt(1, student.getId());
-                ketQua = pre.executeUpdate();
-            } else {
-                System.out.println("Không có sinh viên bạn muốn xóa");
-            }
+            PreparedStatement pre = cn.prepareStatement(SQL);
+            pre.setInt(1, student.getId());
+            ketQua = pre.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return ketQua;
+    }
+
+    public int updateStudent(Student student) {
+        int ketQua = -1;
+        Connection cn = DBContext.getConnection();
+        String SQL = "update STUDENT\n" +
+                "set name = ? , age = ? , address = ? , gpa = ?\n" +
+                "where id = ?";
+        try {
+            PreparedStatement pre = cn.prepareStatement(SQL);
+            pre.setString(1, student.getName());
+            pre.setInt(2, student.getAge());
+            pre.setString(3, student.getAddress());
+            pre.setFloat(4, student.getGpa());
+
+            pre.setInt(5, student.getId());
+            ketQua = pre.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

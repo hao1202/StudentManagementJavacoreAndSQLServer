@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class TestInput {
     public static final Scanner sc = new Scanner(System.in);
     public static String inputString(String name) {
-        System.out.println("Enter " + name + " :");
+        System.out.print("Enter " + name + " :");
         return sc.nextLine();
     }
 
@@ -14,7 +14,7 @@ public class TestInput {
         Integer a;
         while (true) {
             try {
-                System.out.println("Enter " + name + " :");
+                System.out.print("Enter " + name + " :");
                 a = Integer.parseInt(sc.nextLine());
                 break;
             } catch (Exception e) {
@@ -28,7 +28,7 @@ public class TestInput {
         Float a;
         while (true) {
             try {
-                System.out.println("Enter " + name + " :");
+                System.out.print("Enter " + name + " :");
                 a = Float.parseFloat(sc.nextLine());
                 break;
             } catch (Exception e) {
